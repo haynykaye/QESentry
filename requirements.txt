@@ -1,0 +1,8 @@
+PyQt6>=6.6
+PyQt6-WebEngine>=6.6
+SQLAlchemy>=2.0
+PyMySQL>=1.1
+cryptography>=42        # needed by PyMySQL for MySQL 8 (caching_sha2_password) logins
+keyboard>=0.13.5
+psutil>=5.9
+pyinstaller>=6.0

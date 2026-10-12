@@ -1,0 +1,14 @@
+{
+  "database": {
+    "driver": "mysql+pymysql",
+    "host": "localhost",
+    "port": 3306,
+    "name": "qesentry",
+    "user": "your_db_user",
+    "password": "your_password_here",
+    "connect_timeout": 5
+  },
+  "dashboard_refresh_ms": 3000,
+  "flag_threshold": 3,
+  "teacher_registration_code": ""
+}

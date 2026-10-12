@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+build/
+dist/
+*.spec
+logs/
+*.db
+config.json
+config.student.json
+# Real credentials: keep config.json / config.student.json out of version control once you edit them
