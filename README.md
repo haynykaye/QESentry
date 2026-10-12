@@ -12,6 +12,18 @@ of every student session.
 > Pair it with an in-room proctor for high-stakes exams, and get your school's data-privacy approval first
 > (it records names, activity and alerts).
 
+## 0. Create your config files
+`config.json` and `config.student.json` are **not** in this repository because they contain database passwords.
+Create them from the example files:
+1. Copy `config.example.json` and rename the copy to `config.json`.
+2. Copy `config.student.example.json` and rename the copy to `config.student.json`.
+3. Fill in your own database user and password (you set these in steps 3 and 6 below).
+
+**Quick trial without MySQL:** make `config.json` contain only the line below, then skip steps 3 and 6.
+```json
+{ "database": { "driver": "sqlite", "path": "qesentry.db" } }
+```
+
 ## 1. One-time setup (Windows, VS Code, MySQL)
 
 1. Install **Python 3.12**, **VS Code** (+ the Python extension), **MySQL Server 8** and **MySQL Workbench**.
@@ -27,6 +39,7 @@ of every student session.
    The first Teacher Portal start creates the tables automatically.
 6. Back in Workbench, open `sql/02_student_user.sql`, change the password, run it, and put the same values in
    **`config.student.json`**.  *(Run it only after step 5 – the tables must exist.)*
+   Use the user `qesentry_student` (the script creates it) and the password you chose.
 
 If a password is forgotten: `python tools/teacher_admin.py reset-password --username you@school.edu`.
 
@@ -34,6 +47,8 @@ If a password is forgotten: `python tools/teacher_admin.py reset-password --user
 > Control policy has blocked this file"*). Turn Smart App Control off, or ask IT to allow the app.
 
 ## 2. Day-to-day
+
+> **Always test with `python main.py --dev`.** Without `--dev`, the app locks the keyboard system-wide and closes other programs.
 
 **Teacher** — `python main.py` → *Teacher Portal*
 | Tab | What you do |
@@ -84,6 +99,8 @@ QESentry/
 ├── teacher_app.py           Opens the Teacher Portal directly (used for the Teacher .exe)
 ├── config.json              Teacher database profile (never ship to student PCs)
 ├── config.student.json      Student database profile (restricted user)
+├── config.example.json          Safe template for config.json
+├── config.student.example.json  Safe template for config.student.json
 ├── requirements.txt, build.bat, README.md
 ├── qesentry/                The application code
 │   ├── core/                No UI: settings, database, logging, alerts, validation rules
@@ -110,7 +127,7 @@ QESentry/
 │       ├── keyboard_guard.py      Shortcut blocking, clipboard cleaning, screen-capture protection
 │       ├── process_watchdog.py    Banned apps + focus monitor
 │       └── warning_bubble.py      Yellow / red warning banner over the exam
-├── sql/                     01_create_database.sql, 02_student_user.sql
+├── sql/                     01_create_database.sql, 02_student_user.sql, 03_exam_schedule.sql
 ├── tools/teacher_admin.py   List teachers, create one, reset a password
 ├── tests/                   `python -m unittest discover -s tests`, plus bypass_checklist.md
 └── logs/                    Session logs (created while the app runs)

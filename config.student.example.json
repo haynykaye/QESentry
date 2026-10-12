@@ -1,0 +1,20 @@
+{
+  "database": {
+    "driver": "mysql+pymysql",
+    "host": "localhost",
+    "port": 3306,
+    "name": "qesentry",
+    "user": "your_db_here",
+    "password": "your_password_here",
+    "connect_timeout": 5
+  },
+  "override_mode": "release_only",
+  "heartbeat_seconds": 10,
+  "student_id_pattern": "^\\d{4}-\\d{5}-MN-\\d{1}$",
+  "student_id_example": "2022-01234-MN-0",
+  "allowed_prefixes": [
+    "https://docs.google.com/",
+    "https://forms.gle/",
+    "https://accounts.google.com/"
+  ]
+}
